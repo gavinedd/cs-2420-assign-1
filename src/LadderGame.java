@@ -4,12 +4,16 @@ import java.util.ArrayList;
 
 public class LadderGame {
 
+    ArrayList<ArrayList<String>> listOfWords = new ArrayList<ArrayList<String>>();
+
+
     public LadderGame(String dictionaryFile) {
         readDictionary(dictionaryFile);
     }
 
     public void play(String start, String end) {
         // TODO: Write some good stuff here
+        System.out.println(listOfWords.get(8));
     }
 
     public ArrayList<String> oneAway(String word, boolean withRemoval) {
@@ -43,13 +47,23 @@ public class LadderGame {
                 longestWord = Math.max(longestWord, word.length());
             }
 
+
+
             // TODO: You need to do something here to organize the words into groups/arrays of words with the same size
 
 
+            for (int i = 0; i <= longestWord; i++) {
+                listOfWords.add(new ArrayList<String>());
+            }
 
-        }
-        catch (java.io.IOException ex) {
+            for (String word : allWords) {
+                listOfWords.get(word.length()).add(word);
+            }
+
+
+        } catch (java.io.IOException ex) {
             System.out.println("An error occurred trying to read the dictionary: " + ex);
         }
     }
 }
+
