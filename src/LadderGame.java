@@ -13,15 +13,28 @@ public class LadderGame {
 
     public void play(String start, String end) {
         // TODO: Write some good stuff here
-        System.out.println(listOfWords.get(8));
+//        System.out.println(listOfWords.get(2));
+        System.out.println(oneAway("aa",true));
     }
 
     public ArrayList<String> oneAway(String word, boolean withRemoval) {
-        ArrayList<String> words = new ArrayList<>();
+        ArrayList<String> oneAwayWords = new ArrayList<>();
 
         // TODO: Write some good stuff here
-
-        return words;
+        for(String potentialWord: listOfWords.get(word.length())){
+            int away = 0;
+            for (int i = 0; i < word.length(); i++) {
+                if (potentialWord.charAt(i) != word.charAt(i)){
+                away++;}
+            }
+                if (away == 1) {
+                    oneAwayWords.add(potentialWord);
+                }
+        }
+        for(String wordToRemove: oneAwayWords){
+            listOfWords.get(word.length()).remove(wordToRemove);
+        }
+        return oneAwayWords;
     }
 
     public void listWords(int length, int howMany) {
@@ -35,7 +48,6 @@ public class LadderGame {
         File file = new File("Dictionary.txt");
         ArrayList<String> allWords = new ArrayList<>();
 
-        //
         // Track the longest word, because that tells us how big to make the array.
         int longestWord = 0;
         try (Scanner input = new Scanner(file)) {
@@ -46,11 +58,6 @@ public class LadderGame {
                 allWords.add(word);
                 longestWord = Math.max(longestWord, word.length());
             }
-
-
-
-            // TODO: You need to do something here to organize the words into groups/arrays of words with the same size
-
 
             for (int i = 0; i <= longestWord; i++) {
                 listOfWords.add(new ArrayList<String>());
